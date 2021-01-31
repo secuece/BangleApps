@@ -3,6 +3,7 @@ Bangle.js App Loader (and Apps)
 
 [![Build Status](https://travis-ci.org/espruino/BangleApps.svg?branch=master)](https://travis-ci.org/espruino/BangleApps)
 
+* Try the **secuece version** at [secuece/apps](https://secuece.github.io/BangleApps/)
 * Try the **release version** at [banglejs.com/apps](https://banglejs.com/apps)
 * Try the **development version** at [github.io](https://espruino.github.io/BangleApps/)
 
