@@ -1,5 +1,3 @@
-Bangle.setLCDMode("doublebuffered");
-
 E.showMessage("My\nSimple\nApp","My App")
 
 setWatch(function(e) {
