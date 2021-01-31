@@ -10,6 +10,8 @@ function updateStep(state: AppState) {
   if (state.status === ActivityStatus.Running) {
     state.steps += 1;
   }
+
+  console.log((state.steps * 80) / 100 /1000); //distance in km)
 }
 
 export { initStep, updateStep };
