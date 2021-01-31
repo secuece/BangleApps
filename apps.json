@@ -2711,18 +2711,6 @@
     {"name":"planetarium.json"}
   ]
 },
-{ "id": "test",
-  "name": "Testing",
-  "shortName":"Test labs",
-  "icon": "app.png",
-  "version":"0.01",
-  "description": "This is a tesing purpouse app",
-  "tags": "",
-  "storage": [
-    {"name":"test.app.js","url":"app.js"},
-    {"name":"test.img","url":"app-icon.js","evaluate":true}
-  ]
-},
 { "id": "runningtools",
   "name": "Running Tools",
   "shortName":"Running Tools",
@@ -2731,7 +2719,6 @@
   "version":"0.01",
   "description": "Running app mashup of different BangleApps: BangleRun",
   "tags": "run,running,fitness,outdoors",
-  "allow_emulator": false,
   "storage": [
    {
       "name": "runningtools.app.js",
@@ -2742,6 +2729,18 @@
       "url": "app-icon.js",
       "evaluate": true
    }
+  ]
+},
+{ "id": "test",
+  "name": "Testing",
+  "shortName":"Test labs",
+  "icon": "app.png",
+  "version":"0.01",
+  "description": "This is a tesing purpouse app",
+  "tags": "",
+  "storage": [
+    {"name":"test.app.js","url":"app.js"},
+    {"name":"test.img","url":"app-icon.js","evaluate":true}
   ]
 }
 ]
