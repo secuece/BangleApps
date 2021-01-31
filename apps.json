@@ -1438,7 +1438,7 @@
     "version":"0.08",
     "description": "A simple big numerals clock",
     "tags": "numerals,clock",
-	"type":"clock",
+  "type":"clock",
     "allow_emulator":true,
     "storage": [
       {"name":"numerals.app.js","url":"numerals.app.js"},
@@ -2709,6 +2709,18 @@
   ],
   "data":[
     {"name":"planetarium.json"}
+  ]
+},
+{ "id": "test",
+  "name": "Testing",
+  "shortName":"Test labs",
+  "icon": "app.png",
+  "version":"0.01",
+  "description": "This is a tesing purpouse app",
+  "tags": "",
+  "storage": [
+    {"name":"test.app.js","url":"app.js"},
+    {"name":"test.img","url":"app-icon.js","evaluate":true}
   ]
 }
 ]
