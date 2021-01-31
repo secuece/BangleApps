@@ -1,3 +1,5 @@
+Bangle.setLCDMode();
+
 E.showMessage("My\nSimple\nApp","My App")
 
 setWatch(function(e) {
