@@ -1,8 +1,12 @@
 import { draw } from './display';
 import { initLog } from './log';
 import { ActivityStatus, AppState } from './state';
+declare var Bangle: any;
 
 function startActivity(state: AppState): void {
+
+  Bangle.beep();
+
   if (state.status === ActivityStatus.Stopped) {
     initLog(state);
   }
@@ -17,6 +21,9 @@ function startActivity(state: AppState): void {
 }
 
 function stopActivity(state: AppState): void {
+
+  Bangle.beep();
+
   if (state.status === ActivityStatus.Paused) {
     clearActivity(state);
   }

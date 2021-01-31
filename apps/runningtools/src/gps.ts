@@ -18,6 +18,7 @@ const POS_ACCURACY = 2.5;
 const VEL_ACCURACY = 0.05;
 
 function initGps(state: AppState): void {
+     console.log("init gps")
   Bangle.on('GPS', (gps: GpsEvent) => readGps(state, gps));
   Bangle.setGPSPower(1);
 }
@@ -59,6 +60,7 @@ function updateGps(state: AppState): void {
   }
 
   if (!state.gpsValid) {
+       console.log("GPS NOT VALID");
     return;
   }
 
@@ -112,6 +114,8 @@ function updateGps(state: AppState): void {
     state.speed = (state.distance / state.duration) || 0;
     state.cadence = (60 * state.steps / state.duration) || 0;
   }
+
+  console.log((state.steps * 80) / 100 /1000); //distance in km)
 }
 
 export { initGps, parseCoordinate, readGps, updateGps };
