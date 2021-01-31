@@ -2715,20 +2715,12 @@
   "name": "Running Tools",
   "shortName":"Running Tools",
   "icon": "app.png",
-  "interface": "interface.html",
   "version":"0.01",
   "description": "Running app mashup of different BangleApps: BangleRun",
-  "tags": "run,running,fitness,outdoors",
+  "tags": "",
   "storage": [
-   {
-      "name": "runningtools.app.js",
-      "url": "app.js"
-   },
-   {
-      "name": "runningtools.img",
-      "url": "app-icon.js",
-      "evaluate": true
-   }
+   {"name": "runningtools.app.js","url": "app.js"},
+   {"name": "runningtools.img","url": "app-icon.js","evaluate": true}
   ]
 },
 { "id": "test",
