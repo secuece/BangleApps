@@ -3,6 +3,7 @@ import { updateLog } from './log';
 import { ActivityStatus, AppState } from './state';
 
 declare var Bangle: any;
+declare var Terminal: any;
 
 interface GpsEvent {
   lat: number;
@@ -60,6 +61,7 @@ function updateGps(state: AppState): void {
   }
 
   if (!state.gpsValid) {
+       Terminal.println("GPS NOT VALID");
        console.log("GPS NOT VALID");
     return;
   }
@@ -115,6 +117,7 @@ function updateGps(state: AppState): void {
     state.cadence = (60 * state.steps / state.duration) || 0;
   }
 
+  Terminal.println((state.steps * 80) / 100 /1000); //distance in km)
   console.log((state.steps * 80) / 100 /1000); //distance in km)
 }
 

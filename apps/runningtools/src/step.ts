@@ -1,6 +1,7 @@
 import { ActivityStatus, AppState } from './state';
 
 declare var Bangle: any;
+declare var Terminal: any;
 
 function initStep(state: AppState) {
   Bangle.on('step', () => updateStep(state));
@@ -12,6 +13,7 @@ function updateStep(state: AppState) {
   }
 
   console.log((state.steps * 80) / 100 /1000); //distance in km)
+  Terminal.println((state.steps * 80) / 100 /1000);
 }
 
 export { initStep, updateStep };

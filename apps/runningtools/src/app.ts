@@ -4,12 +4,15 @@ import { initGps } from './gps';
 import { initHrm } from './hrm';
 import { initState } from './state';
 import { initStep } from './step';
+declare var Terminal: any;
 
 declare var BTN1: any;
 declare var BTN3: any;
 declare var setWatch: any;
 
 const appState = initState();
+
+Terminal.println("Welcome");
 
 initGps(appState);
 initHrm(appState);
