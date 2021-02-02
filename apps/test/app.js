@@ -115,9 +115,11 @@ function drawScreen() {
 
 
 function startActivity() {
+    Bangle.beep(); 
     forceResetActivity = false;
     if ( activityState == ACTIVITY_STATE.Stop ) {
       Bangle.setGPSPower(1);
+      VIBRATE.write(1);
       activityState = ACTIVITY_STATE.Run;
     } else if ( activityState == ACTIVITY_STATE.Pause ) {
       activityState = ACTIVITY_STATE.Run;
@@ -131,6 +133,7 @@ function startActivity() {
   
   
 function stopActivity() {
+    Bangle.beep(); 
     if ( activityState == ACTIVITY_STATE.Stop ) {
       activityState = ACTIVITY_STATE.Stop;
       if ( forceResetActivity ) {
@@ -140,6 +143,7 @@ function stopActivity() {
       }
     } else if ( activityState == ACTIVITY_STATE.Pause ) {
       Bangle.setGPSPower(0);
+      VIBRATE.write(0);
       activityState = ACTIVITY_STATE.Stop;
     } else if ( activityState == ACTIVITY_STATE.Run ) {
       activityState = ACTIVITY_STATE.Pause;
@@ -150,7 +154,11 @@ function stopActivity() {
 
 
 
-g.clear();
+//analogWrite(D18,0.5,{freq:2000});setTimeout(()=>D18.reset(),200);
+
+
+Bangle.beep(); 
+
 setWatch(() => startActivity(), BTN1, { repeat: true, edge: 'falling' });
 setWatch(() => stopActivity(), BTN3, { repeat: true, edge: 'falling' });
 drawScreen();
