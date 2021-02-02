@@ -17,4 +17,5 @@ g.drawString("GPS", 220, 5);
 Bangle.on("GPS", function (gpsData) {
   g.drawString(gpsData.lat.toFixed(0), 220, 10);
   g.drawString(gpsData.lon.toFixed(0), 220, 15);
+  g.flip();
 });
