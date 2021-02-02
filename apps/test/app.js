@@ -72,7 +72,7 @@ function drawScreen() {
   g.setColor(50712);
   g.setFont("6x8", 2);
   g.setFontAlign(0, -1, 0);
-  g.drawString("DIST (KM)", 60, 32);
+  g.drawString("DIST2(KM)", 60, 32);
   g.drawString("TIME", 180, 32);
   g.drawString("STEPS", 60, 92);
   g.drawString("HEART", 180, 92);
