@@ -17,9 +17,10 @@ let distance = 10;
 let duration = "10:00";
 let speed = 0.4;
 let min = 10.2;
-let stateGps = false;
 let activityState = ACTIVITY_STATE.Stop;
 let forceResetActivity = false;
+let stateGps = false;
+let gpsFixNumber = 0;
 
 
 
@@ -72,7 +73,7 @@ function drawScreen() {
   g.setColor(50712);
   g.setFont("6x8", 2);
   g.setFontAlign(0, -1, 0);
-  g.drawString("DIST2(KM)", 60, 32);
+  g.drawString("DIST (KM)", 60, 32);
   g.drawString("TIME", 180, 32);
   g.drawString("STEPS", 60, 92);
   g.drawString("HEART", 180, 92);
@@ -96,8 +97,11 @@ function drawScreen() {
   g.setColor( stateGps ? 0x07E0 : 0xF800);
   g.fillRect(0, 216, 80, 240);
   g.setColor(0x0000);
-  g.drawString('GPS', 40, 220);
+  g.drawString('GPS', 33, 220);
+  g.setFont('6x8', 1);
+  g.drawString('(' + gpsFixNumber.toFixed(0) + ')', 63, 225);
 
+  g.setFont('6x8', 2);
   g.setColor(0xFFFF);
   g.fillRect(80, 216, 160, 240);
   g.setColor(0x0000);
@@ -119,7 +123,6 @@ function startActivity() {
     forceResetActivity = false;
     if ( activityState == ACTIVITY_STATE.Stop ) {
       Bangle.setGPSPower(1);
-      VIBRATE.write(1);
       activityState = ACTIVITY_STATE.Run;
     } else if ( activityState == ACTIVITY_STATE.Pause ) {
       activityState = ACTIVITY_STATE.Run;
@@ -143,7 +146,6 @@ function stopActivity() {
       }
     } else if ( activityState == ACTIVITY_STATE.Pause ) {
       Bangle.setGPSPower(0);
-      VIBRATE.write(0);
       activityState = ACTIVITY_STATE.Stop;
     } else if ( activityState == ACTIVITY_STATE.Run ) {
       activityState = ACTIVITY_STATE.Pause;
@@ -153,12 +155,20 @@ function stopActivity() {
 }
 
 
+function manageGPS(gpsData) {
+  gpsFixNumber = gpsData.fix;
+  if ( gpsFixNumber > 0 ) {
+    stateGps = true;
+  } else {
+    stateGps = false;
+  }
+}
 
-//analogWrite(D18,0.5,{freq:2000});setTimeout(()=>D18.reset(),200);
 
 
 Bangle.beep(); 
-
+Bangle.on('GPS', manageGPS);
 setWatch(() => startActivity(), BTN1, { repeat: true, edge: 'falling' });
 setWatch(() => stopActivity(), BTN3, { repeat: true, edge: 'falling' });
 drawScreen();
+
