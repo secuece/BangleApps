@@ -156,8 +156,9 @@ function stopActivity() {
 
 
 function manageGPS(gpsData) {
-  gpsFixNumber = gpsData.fix;
-  if ( gpsFixNumber > 0 ) {
+  gpsFixNumber = gpsData.satellites;
+  if ( gpsData.fix ) {
+    //https://banglejs.com/reference#l_Bangle_GPS
     stateGps = true;
   } else {
     stateGps = false;
