@@ -3,6 +3,7 @@ import { BtnTypes } from '../../constants/btn-types';
 import { ScreenType } from '../../constants/screen-type';
 import { ScreenRunManager } from './screen-run-manager';
 import { ScreenGPSManager } from './screen-gps-manager';
+import { BangleJSManager } from '../banglejs-manager';
 
 export class ScreenManager {
 
@@ -35,11 +36,16 @@ export class ScreenManager {
 
 
      public static drawScreen(appContext: AppContext) {
+
+          //BangleJSManager.g().clear();
+
           if ( !appContext.stateGps ) {
                ScreenGPSManager.drawScreen(appContext);
           } else if (appContext.screenType == ScreenType.Running) {
                ScreenRunManager.drawScreen(appContext);
           }
+
+          BangleJSManager.g().flip();
      }
 
 

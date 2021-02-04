@@ -7,7 +7,6 @@ export class ScreenGPSManager {
 
      public static drawScreen(appContext: AppContext) {
 
-          BangleJSManager.g().clear();
           BangleJSManager.g().setFontAlign(-1, -1);
           BangleJSManager.g().drawImage(SATELITE_IMAGE, 20, -12);
           BangleJSManager.g().setFont("6x8");
@@ -24,7 +23,6 @@ export class ScreenGPSManager {
           BangleJSManager.g().setFont("6x8");
           BangleJSManager.g().drawString(appContext.satellites + " satellites", 120, 100);
 
-          BangleJSManager.g().flip();
      }
 
 }
