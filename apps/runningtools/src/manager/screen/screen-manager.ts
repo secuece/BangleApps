@@ -38,6 +38,7 @@ export class ScreenManager {
      public static drawScreen(appContext: AppContext) {
 
           //BangleJSManager.g().clear();
+          //BangleJSManager.Bangle().drawWidgets();
 
           if ( !appContext.stateGps ) {
                ScreenGPSManager.drawScreen(appContext);
@@ -46,6 +47,7 @@ export class ScreenManager {
           }
 
           BangleJSManager.g().flip();
+
      }
 
 
