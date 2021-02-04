@@ -2,7 +2,7 @@ import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
-  input: './src/main.ts',
+  input: './src/app.ts',
   output: {
     dir: '.',
     format: 'iife',
