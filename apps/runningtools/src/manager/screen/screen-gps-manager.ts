@@ -23,6 +23,8 @@ export class ScreenGPSManager {
           BangleJSManager.g().setFontAlign(0, 0);
           BangleJSManager.g().setFont("6x8");
           BangleJSManager.g().drawString(appContext.satellites + " satellites", 120, 100);
+
+          BangleJSManager.g().flip();
      }
 
 }

@@ -10,7 +10,7 @@ import { BangleJSManager } from './manager/banglejs-manager';
 const appContext = new AppContext();
 
 //Init screen
-BangleJSManager.E().showMessage("Loading...");
+BangleJSManager.E().showMessage("Waiting GPS...");
 
 
 //Listeners
