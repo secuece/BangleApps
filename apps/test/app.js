@@ -1,28 +1,20 @@
-Bangle.setLCDMode();
+Bangle.setGPSPower(1);
 
-E.showMessage("My\nSimple\nApp","My App")
+const gpsState = false;
 
-setWatch(function(e) {
-     Bangle.beep(10);
-    E.showMessage("Left","My App");
-}, BTN4, { edge:"falling",repeat:true,debounce:50});
+g.clear();
+g.setColor(50712);
+g.setFont("6x8", 2);
+g.drawString("DIST (KM)", 5, 5);
 
-
-setWatch(function(e) {
-     Bangle.beep(10);
-    E.showMessage("Right","My App");
-}, BTN5, { edge:"falling",repeat:true,debounce:50});
-
-
-setWatch(function(e) {
-     Bangle.beep(10);
-    E.showMessage("BTN2","My App");
-}, BTN2, {});
+g.setFont("6x8", 1);
+g.setColor(gpsState ? 2016 : 63488);
+g.drawString("GPS", 220, 5);
 
 
 
-if ( BTN1.read() ) {
-     Bangle.beep(10);
-     E.showMessage("BTN1","My App");
-     console.log("BTN1");
-}
+
+Bangle.on("GPS", function (gpsData) {
+  g.drawString(gpsData.lat.toFixed(0), 220, 10);
+  g.drawString(gpsData.lon.toFixed(0), 220, 15);
+});
