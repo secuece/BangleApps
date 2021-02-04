@@ -9,9 +9,6 @@ import { BangleJSManager } from './manager/banglejs-manager';
 
 const appContext = new AppContext();
 
-//Init screen
-BangleJSManager.E().showMessage("Waiting GPS...");
-
 
 //Listeners
 BangleJSManager.setWatch(() => ScreenManager.manageBtnAction(appContext, BtnTypes.BTN1), BangleJSManager.BTN1(), { repeat: true, edge: 'falling' });
@@ -24,4 +21,8 @@ BangleJSManager.Bangle().on('GPS', (gpsResponse: GpsResponse) => GPSManager.proc
 
 //Init GPS
 BangleJSManager.Bangle().setGPSPower(1);
+
+
+//Init screen
+ScreenManager.drawScreen(appContext);
 
