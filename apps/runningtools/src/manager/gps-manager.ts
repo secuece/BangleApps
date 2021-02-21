@@ -27,7 +27,7 @@ export class GPSManager {
           BangleJSManager.g().setFontAlign(-1, -1);
           BangleJSManager.g().setFont("6x8");
           BangleJSManager.g().setFontVector(22);
-          BangleJSManager.g().drawString("GPS Info", 70, 0);
+          BangleJSManager.g().drawString("GPS Info TEST", 70, 0);
           if (gpsResponse.fix) {
             var alt = gpsResponse.alt;
             var lat = gpsResponse.lat;
