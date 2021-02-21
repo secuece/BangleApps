@@ -1,1 +1,90 @@
-!function(){"use strict";var t,e;!function(t){t[t.Running=1]="Running",t[t.Heart=2]="Heart",t[t.Map=3]="Map",t[t.Gps=4]="Gps"}(t||(t={}));!function(t){t[t.BTN1=1]="BTN1",t[t.BTN2=2]="BTN2",t[t.BTN3=3]="BTN3",t[t.BTN4=4]="BTN4",t[t.BTN5=5]="BTN5"}(e||(e={}));class s{static btn1Action(t){}static btn3Action(t){}static drawScreen(t){}static manageBtnAction(t,n){n==e.BTN1?s.btn1Action(t):n==e.BTN3&&s.btn3Action(t)}}class n{static require(t){return require(t)}static g(){return g}static E(){return E}static setWatch(t,e,s){return setWatch(t,e,s)}static BTN1(){return BTN1}static BTN2(){return BTN2}static BTN3(){return BTN3}static BTN4(){return BTN4}static BTN5(){return BTN5}static Bangle(){return Bangle}}const i=n.require("heatshrink").decompress(atob("mEwghC/AH4AKg9wC6t3u4uVC6wWBI6t3uJeVuMQCqcBLisAi4XLxAABFxAXKgc4DBAuBRhQXEDAq7MmYXEwBHEXZYXFGAOqAAKDMmczC4mIC62CC50PC4JIBkQABiIvRmURAAUSjQXSFwMoxGKC6CRFwUSVYgXLPIgXXwMYegoXLJAYXCGBnzGA0hPQIwMgYwGC6gwCC4ZIMC4gYBC604C4ZISmcRVgapQAAMhC6GIJIwXCMBcIxGDDBAuLC4IwGAARGMAAQWGmAXPJQoWMC4pwCCpoXJAB4XXAH4A/ABQA="));class a{static manageBtnAction(n,i){n.stateGps||(i==e.BTN2?a.nextScreen(n):n.screenType==t.Running&&s.manageBtnAction(n,i)),a.drawScreen(n)}static nextScreen(e){e.screenType==t.Running?e.screenType=t.Heart:e.screenType==t.Heart?e.screenType=t.Map:e.screenType=t.Running}static drawScreen(e){e.stateGps?e.screenType==t.Running&&s.drawScreen(e):class{static drawScreen(t){n.g().setFontAlign(-1,-1),n.g().drawImage(i,20,-12),n.g().setFont("6x8"),n.g().setFontVector(22),n.g().drawString("GPS Info",70,0),n.g().setFontAlign(0,1),n.g().setFont("6x8",2),n.g().drawString("Waiting for GPS",120,80),n.g().drawString("...",120,120),n.g().setFontAlign(0,0),n.g().setFont("6x8"),n.g().drawString(t.satellites+" satellites",120,100)}}.drawScreen(e),n.g().flip()}}const r=new class{constructor(){this._steps=0,this._heart=0,this._distance=0,this._duration=0,this._speed=0,this._minutes=0,this._screenType=t.Gps,this._stateGps=!1,this._lat=0,this._lon=0,this._alt=0,this._satellites=0,this._activityState=0,this._forceResetActivity=!1}get steps(){return this._steps}set steps(t){this._steps=t}get heart(){return this._heart}set heart(t){this._heart=t}get distance(){return this._distance}set distance(t){this._distance=t}get duration(){return this._duration}set duration(t){this._duration=t}get speed(){return this._speed}set speed(t){this._speed=t}get minutes(){return this._minutes}set minutes(t){this._minutes=t}get calories(){return this._calories}set calories(t){this._calories=t}get screenType(){return this._screenType}set screenType(t){this._screenType=t}get stateGps(){return this._stateGps}set stateGps(t){this._stateGps=t}get activityState(){return this._activityState}set activityState(t){this._activityState=t}get forceResetActivity(){return this._forceResetActivity}set forceResetActivity(t){this._forceResetActivity=t}get lat(){return this._lat}set lat(t){this._lat=t}get lon(){return this._lon}set lon(t){this._lon=t}get alt(){return this._alt}set alt(t){this._alt=t}get satellites(){return this._satellites}set satellites(t){this._satellites=t}};n.setWatch(()=>a.manageBtnAction(r,e.BTN1),n.BTN1(),{repeat:!0,edge:"falling"}),n.setWatch(()=>a.manageBtnAction(r,e.BTN2),n.BTN2(),{repeat:!0,edge:"falling"}),n.setWatch(()=>a.manageBtnAction(r,e.BTN3),n.BTN3(),{repeat:!0,edge:"falling"}),n.setWatch(()=>a.manageBtnAction(r,e.BTN4),n.BTN4(),{repeat:!0,edge:"falling"}),n.setWatch(()=>a.manageBtnAction(r,e.BTN5),n.BTN5(),{repeat:!0,edge:"falling"}),n.Bangle().on("GPS",t=>class{static processGPSResponse(t,e){e.fix&&(t.stateGps=!0),t.speed=e.speed,t.lat=e.lat,t.lon=e.lon,t.alt=e.alt,t.satellites=e.satellites}}.processGPSResponse(r,t)),n.Bangle().setGPSPower(1),n.Bangle().setLCDMode(),a.drawScreen(r)}();
+Bangle.setGPSPower(1);
+Bangle.setLCDMode("doublebuffered");
+E.showMessage("Loading..."); // avoid showing rubbish on screen
+
+var lastFix = {
+  fix: 0,
+  alt: 0,
+  lat: 0,
+  lon: 0,
+  speed: 0,
+  time: 0,
+  satellites: 0
+};
+var nofix = 0;
+
+function formatTime(now) {
+  var fd = now.toUTCString().split(" ");
+  var time = fd[4].substr(0, 5);
+  var date = [fd[0], fd[1], fd[2]].join(" ");
+  return time + " - " + date;
+}
+function getMaidenHead(param1,param2){
+  var lat=-100.0;
+  var lon=0.0;
+  var U = 'ABCDEFGHIJKLMNOPQRSTUVWX';
+  var L = U.toLowerCase();
+
+  lat = param1;
+  lon = param2;
+
+  lon = lon + 180;
+  t = lon/20;
+  fLon = Math.floor(t);
+  t = (t % fLon)*10;
+  sqLon = Math.floor(t);
+  t=(t-sqLon)*24;
+  subLon = Math.floor(t);
+  extLon = Math.floor((t-subLon)*10);
+
+  lat = lat + 90;
+  t = lat/10;
+  fLat = Math.floor(t);
+  t = (t % fLat)*10;
+  sqLat = Math.floor(t);
+  t=(t-sqLat)*24;
+  subLat = Math.floor(t);
+  extLat = Math.floor((t-subLat)*10);
+
+  return U[fLon]+U[fLat]+sqLon+sqLat+L[subLon]+L[subLat]+extLon+extLat;
+}
+function onGPS(fix) {
+  lastFix = fix;
+  g.clear();
+  g.setFontAlign(-1, -1);
+  g.setFont("6x8");
+  g.setFontVector(22);
+  g.drawString("GPS Info", 70, 0);
+  if (fix.fix) {
+    nofix = 0;
+    var alt = fix.alt;
+    var lat = fix.lat;
+    var lon = fix.lon;
+    var speed = fix.speed;
+    var time = formatTime(fix.time);
+    var satellites = fix.satellites;
+    var maidenhead = getMaidenHead(lat,lon);
+    var s = 15;
+    g.setFontVector(s);
+    g.drawString("Altitude: "+alt+" m",10,36);
+    g.drawString("Lat: "+lat,10,54);
+    g.drawString("Lon: "+lon,10,72);
+    g.drawString("Speed: "+speed.toFixed(1)+" km/h",10,90);
+    g.drawString("Time: "+time,10,108);
+    g.drawString("Satellites: "+satellites,10,126);
+    g.drawString("Maidenhead: "+maidenhead,10,144);
+  } else {
+    g.setFontAlign(0, 1);
+    g.setFont("6x8", 2);
+    g.drawString("Waiting for GPS", 120, 80);
+    nofix = (nofix+1) % 4;
+    g.drawString(".".repeat(nofix) + " ".repeat(4-nofix), 120, 120);
+    // Show number of satellites:
+    g.setFontAlign(0,0);
+    g.setFont("6x8");
+    g.drawString(fix.satellites+" satellites", 120, 100);
+  }
+  g.flip();
+}
+
+Bangle.on('GPS', onGPS);

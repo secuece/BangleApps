@@ -26,4 +26,3 @@ BangleJSManager.Bangle().setGPSPower(1);
 //Init screen
 BangleJSManager.Bangle().setLCDMode();
 ScreenManager.drawScreen(appContext);
-
