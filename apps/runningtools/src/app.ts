@@ -30,7 +30,12 @@ ScreenManager.drawScreen(appContext);
 */
 
 import { BangleJSManager } from "./manager/banglejs-manager";
+import { GpsResponse } from "./models/gps-response";
+import { AppContext } from "./models/app-context";
+import { GPSManager } from "./manager/gps-manager";
 
+
+const appContext = new AppContext();
 
 BangleJSManager.Bangle().setGPSPower(1);
 BangleJSManager.Bangle().setLCDMode("doublebuffered");
@@ -83,4 +88,10 @@ function onGPS(fix: any) {
   BangleJSManager.g().flip();
 }
 
-BangleJSManager.Bangle().on('GPS', onGPS);
+//BangleJSManager.Bangle().on('GPS', onGPS);
+BangleJSManager.Bangle().on('GPS', (gpsResponse: GpsResponse) => GPSManager.processGPSResponse(appContext, gpsResponse));
+
+
+
+
+
