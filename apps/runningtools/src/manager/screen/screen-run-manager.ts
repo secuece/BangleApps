@@ -1,5 +1,6 @@
 import { AppContext } from '../../models/app-context';
 import { BtnTypes } from '../../constants/btn-types';
+import { BangleJSManager } from '../banglejs-manager';
 
 export class ScreenRunManager {
 
@@ -15,6 +16,8 @@ export class ScreenRunManager {
 
 
      public static drawScreen(appContext: AppContext) {
+
+          BangleJSManager.g().drawString("DONE", 70, 0);
 
      }
 

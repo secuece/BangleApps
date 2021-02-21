@@ -1,5 +1,6 @@
 import { GpsResponse } from "../models/gps-response";
 import { AppContext } from "../models/app-context";
+import { ScreenManager } from "./screen/screen-manager";
 
 export class GPSManager {
 
@@ -14,6 +15,8 @@ export class GPSManager {
           appContext.lon = gpsResponse.lon;
           appContext.alt = gpsResponse.alt;
           appContext.satellites = gpsResponse.satellites;
+
+          ScreenManager.drawScreen(appContext);
 
 
      }

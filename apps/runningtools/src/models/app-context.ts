@@ -32,7 +32,7 @@ export class AppContext {
           this._speed = 0;
           this._minutes = 0;
 
-          this._screenType = ScreenType.Gps;
+          this._screenType = ScreenType.Running;
 
           this._stateGps = false;
           this._lat = 0;
