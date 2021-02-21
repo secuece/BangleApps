@@ -27,7 +27,7 @@ export class GPSManager {
           BangleJSManager.g().setFontAlign(-1, -1);
           BangleJSManager.g().setFont("6x8");
           BangleJSManager.g().setFontVector(22);
-          BangleJSManager.g().drawString("GPS Info TEST", 70, 0);
+          BangleJSManager.g().drawString("GPS TEST", 70, 0);
           if (gpsResponse.fix) {
             var alt = gpsResponse.alt;
             var lat = gpsResponse.lat;
@@ -44,7 +44,7 @@ export class GPSManager {
           } else {
             BangleJSManager.g().setFontAlign(0, 1);
             BangleJSManager.g().setFont("6x8", 2);
-            BangleJSManager.g().drawString("Waiting for GPS", 120, 80);
+            BangleJSManager.g().drawString("Waiti22 for GPS", 120, 80);
             const nofix = Math.floor(Math.random() * (4 - 1 + 1) + 1);
             BangleJSManager.g().drawString(".".repeat(nofix) + " ".repeat(4-nofix), 120, 120);
             // Show number of satellites:

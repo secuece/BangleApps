@@ -53,40 +53,6 @@ var lastFix = {
 
 var nofix = 0;
 
-function onGPS(fix: any) {
-  lastFix = fix;
-  BangleJSManager.g().clear();
-  BangleJSManager.g().setFontAlign(-1, -1);
-  BangleJSManager.g().setFont("6x8");
-  BangleJSManager.g().setFontVector(22);
-  BangleJSManager.g().drawString("GPS Info", 70, 0);
-  if (fix.fix) {
-    nofix = 0;
-    var alt = fix.alt;
-    var lat = fix.lat;
-    var lon = fix.lon;
-    var speed = fix.speed;
-    var satellites = fix.satellites;
-    var s = 15;
-    BangleJSManager.g().setFontVector(s);
-    BangleJSManager.g().drawString("Altitude: "+alt+" m",10,36);
-    BangleJSManager.g().drawString("Lat: "+lat,10,54);
-    BangleJSManager.g().drawString("Lon: "+lon,10,72);
-    BangleJSManager.g().drawString("Speed: "+speed.toFixed(1)+" km/h",10,90);
-    BangleJSManager.g().drawString("Satellites: "+satellites,10,126);
-  } else {
-    BangleJSManager.g().setFontAlign(0, 1);
-    BangleJSManager.g().setFont("6x8", 2);
-    BangleJSManager.g().drawString("Waiting for GPS", 120, 80);
-    nofix = (nofix+1) % 4;
-    BangleJSManager.g().drawString(".".repeat(nofix) + " ".repeat(4-nofix), 120, 120);
-    // Show number of satellites:
-    BangleJSManager.g().setFontAlign(0,0);
-    BangleJSManager.g().setFont("6x8");
-    BangleJSManager.g().drawString(fix.satellites+" satellites", 120, 100);
-  }
-  BangleJSManager.g().flip();
-}
 
 //BangleJSManager.Bangle().on('GPS', onGPS);
 BangleJSManager.Bangle().on('GPS', (gpsResponse: GpsResponse) => GPSManager.processGPSResponse(appContext, gpsResponse));
