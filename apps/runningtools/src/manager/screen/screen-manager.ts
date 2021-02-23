@@ -2,53 +2,57 @@ import { AppContext } from '../../models/app-context';
 import { BtnTypes } from '../../constants/btn-types';
 import { ScreenType } from '../../constants/screen-type';
 import { ScreenRunManager } from './screen-run-manager';
-import { ScreenGPSManager } from './screen-gps-manager';
 import { BangleJSManager } from '../banglejs-manager';
 
 export class ScreenManager {
 
 
-     public static manageBtnAction(appContext: AppContext, btn: BtnTypes) {
+     public static manageBtnAction(btn: BtnTypes) {
 
-          if ( !appContext.stateGps ) {
+          if ( !AppContext.getInstance().stateGps ) {
                if (btn == BtnTypes.BTN2) {
-                    ScreenManager.nextScreen(appContext);
-               } else if (appContext.screenType == ScreenType.Running) {
-                    ScreenRunManager.manageBtnAction(appContext, btn);
+                    ScreenManager.nextScreen();
+               } else if (AppContext.getInstance().screenType == ScreenType.Running) {
+                    ScreenRunManager.manageBtnAction(btn);
                }
           }
 
-          ScreenManager.drawScreen(appContext);
-
      }
 
-     public static nextScreen(appContext: AppContext) {
+     public static nextScreen() {
 
-          if (appContext.screenType == ScreenType.Running) {
-               appContext.screenType = ScreenType.Heart;
-          } else if (appContext.screenType == ScreenType.Heart) {
-               appContext.screenType = ScreenType.Map;
+          if (AppContext.getInstance().screenType == ScreenType.Running) {
+               AppContext.getInstance().screenType = ScreenType.Heart;
+          } else if (AppContext.getInstance().screenType == ScreenType.Heart) {
+               AppContext.getInstance().screenType = ScreenType.Map;
           } else {
-               appContext.screenType = ScreenType.Running;
+               AppContext.getInstance().screenType = ScreenType.Running;
           }
 
+          ScreenManager.drawScreen();
+
      }
 
 
-     public static drawScreen(appContext: AppContext) {
+     public static drawScreen() {
 
           BangleJSManager.g().clear();
           BangleJSManager.Bangle().drawWidgets();
 
-          if ( !appContext.stateGps ) {
-               ScreenGPSManager.drawScreen(appContext);
-          } else if (appContext.screenType == ScreenType.Running) {
-               ScreenRunManager.drawScreen(appContext);
+          /*
+          if ( !AppContext.getInstance().stateGps ) {
+               ScreenGPSManager.drawScreen();
+          } else if (AppContext.getInstance().screenType == ScreenType.Running) {
+               ScreenRunManager.drawScreen();
           }
+          */
+
+          ScreenRunManager.drawScreen();
 
           BangleJSManager.g().flip();
 
      }
+
 
 
 }

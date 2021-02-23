@@ -2715,7 +2715,7 @@
   "name": "Running Tools",
   "shortName":"Running Tools",
   "icon": "app.png",
-  "version":"0.02",
+  "version":"0.03",
   "interface": "interface.html",
   "description": "Running app mashup of different BangleApps: BangleRun",
   "tags": "",
